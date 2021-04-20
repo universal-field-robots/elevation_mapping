@@ -69,8 +69,8 @@ bool SensorProcessorBase::process(const PointCloudType::ConstPtr pointCloudInput
 
   // Transform into sensor frame.
   PointCloudType::Ptr pointCloudSensorFrame(new PointCloudType);
-  transformPointCloud(pointCloudInput, pointCloudSensorFrame, sensorFrameId_);
-
+  // transformPointCloud(pointCloudInput, pointCloudSensorFrame, sensorFrameId_);
+  pcl::copyPointCloud(*pointCloudInput, *pointCloudSensorFrame);
   // Remove Nans (optional voxel grid filter)
   filterPointCloud(pointCloudSensorFrame);
 

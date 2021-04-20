@@ -102,7 +102,7 @@ void ElevationMapping::setupSubscribers() {  // Handle deprecated point_cloud_to
   }
   if (!configuredInputSources && hasDeprecatedPointcloudTopic) {
     pointCloudSubscriber_ = nodeHandle_.subscribe<sensor_msgs::PointCloud2>(
-        pointCloudTopic_, 1,
+        pointCloudTopic_, 3,
         std::bind(&ElevationMapping::pointCloudCallback, this, std::placeholders::_1, true, std::ref(sensorProcessor_)));
   }
   if (configuredInputSources) {
