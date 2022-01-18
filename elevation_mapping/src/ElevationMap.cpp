@@ -327,7 +327,11 @@ bool ElevationMap::fuse(const grid_map::Index& topLeftIndex, const grid_map::Ind
 
     // Prepare data fusion.
     Eigen::ArrayXf means, weights;
-    const unsigned int maxNumberOfCellsToFuse = ellipseIterator.getSubmapSize().prod();
+    unsigned int maxNumberOfCellsToFuse = ellipseIterator.getSubmapSize().prod(); // UFR_MOD: removed const
+    if (ellipseIterator.isPastEnd()) // UFR_MOD: Added 
+    {
+      maxNumberOfCellsToFuse = abs(ellipseIterator.getSubmapSize().prod());
+    } // UFR_MOD: Added 
     means.resize(maxNumberOfCellsToFuse);
     weights.resize(maxNumberOfCellsToFuse);
     WeightedEmpiricalCumulativeDistributionFunction<float> lowerBoundDistribution;
