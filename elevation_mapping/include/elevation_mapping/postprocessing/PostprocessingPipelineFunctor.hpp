@@ -9,7 +9,17 @@
 #pragma once
 
 #include <ros/ros.h>
-#include <filters/filter_chain.hpp>
+#if defined __has_include
+  #if __has_include (<filters/filter_chain.hpp>)
+    #include <filters/filter_chain.hpp>
+  #else
+    #include <filters/filter_chain.h>
+  #endif
+#else
+  #warning "Preprocessor operator __has_include was not supported by compiler. Please update compiler. filters/filter_chain.h was included as failover."
+  #include <filters/filter_chain.h>
+#endif
+
 #include <grid_map_core/GridMap.hpp>
 
 namespace elevation_mapping {
